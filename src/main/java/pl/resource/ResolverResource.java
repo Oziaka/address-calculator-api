@@ -27,14 +27,22 @@ public class ResolverResource {
   private CalculateNetworkAndBroadcastAddressResolver calculateNetworkAndBroadcastAddressResolver;
   private DivideAddressOnNetworkAddressResolver divideAddressOnNetworkAddressResolver;
 
+  @GetMapping("/divideNetworkWithSubnet")
+  public ResponseEntity<SubnetDto> divideNetworkWithSubnet (@RequestBody @Valid AddressDto addressDto,
+                                                            @RequestParam
+                                                            @Min(value = 1, message = "{error.number_of_subnet.too_small}")
+                                                            @Max(value = 65536, message = "{error.number_of_subnet.too_big}")
+                                                              int numberOfSubnet) {
+    return ResponseEntity.ok(divideNetworkResolver.resolve(addressDto, numberOfSubnet, true));
+  }
+
   @GetMapping("/divideNetwork")
   public ResponseEntity<SubnetDto> divideNetwork (@RequestBody @Valid AddressDto addressDto,
                                                   @RequestParam
                                                   @Min(value = 1, message = "{error.number_of_subnet.too_small}")
                                                   @Max(value = 1073741823, message = "{error.number_of_subnet.too_big}")
-                                                    int numberOfSubnet,
-                                                  @RequestParam(defaultValue = "true") Boolean withDetails) {
-    return ResponseEntity.ok(divideNetworkResolver.resolve(addressDto, numberOfSubnet, withDetails));
+                                                    int numberOfSubnet) {
+    return ResponseEntity.ok(divideNetworkResolver.resolve(addressDto, numberOfSubnet, false));
   }
 
   @GetMapping("/calculateBroadcastAndNetworkAddress")

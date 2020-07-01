@@ -4,7 +4,7 @@ public class Tool {
   //  Min number of subnet in network should greater or equals to 2^x
   public static int minNumberOfSubnet (int numberOfSubnet) {
     int minNumberOfSubnet = 1;
-    while (minNumberOfSubnet <= numberOfSubnet) minNumberOfSubnet *= 2;
+    while (minNumberOfSubnet < numberOfSubnet) minNumberOfSubnet *= 2;
     return minNumberOfSubnet;
   }
 

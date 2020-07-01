@@ -26,15 +26,15 @@ public class DivideNetworkResolver {
   private NetworkService networkService;
   private SubnetFactoryService subnetFactoryService;
 
-  public SubnetDto resolve (AddressDto addressDto, int numberOfSubnet, boolean withDetails) {
+  public SubnetDto resolve (AddressDto addressDto, int numberOfSubnet, boolean withSubnet) {
     byte numberOfFieldsForSubnet = Tool.numberOfFieldsForSubnet(Tool.minNumberOfSubnet(numberOfSubnet));
     Network network = networkService.createNetwork(addressDto);
+    whetherTheNetworkWillFitSoManySubnet(network, numberOfFieldsForSubnet);
     SubnetDto.SubnetDtoBuilder subnetDtoBuilder = SubnetDto.builder()
       .networkMask(NetworkMask.builder().numberOfOnesNetworkMask(new NumberOfOnesNetworkMask((byte) (numberOfFieldsForSubnet + network.getNetworkMask().getNumberOfOnesNetworkMask().getAddress()))).build())
       .numberOfSubnet((long) (Math.pow(2, numberOfFieldsForSubnet)))
       .numberOfHostsPerSubnet((long) (Math.pow(2, 32 - (byte) (numberOfFieldsForSubnet + network.getNetworkMask().getNumberOfOnesNetworkMask().getAddress()))));
-    if(withDetails) {
-      whetherTheNetworkWillFitSoManySubnet(network, numberOfFieldsForSubnet);
+    if(withSubnet) {
       List<Network> subnet = subnetFactoryService.createSubnet(network, numberOfFieldsForSubnet);
       return subnetDtoBuilder
         .subnetAddresses(subnet.stream().map(SubnetAddressesDtoMapper::toDto).collect(Collectors.toList()))
