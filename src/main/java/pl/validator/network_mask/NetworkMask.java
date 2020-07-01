@@ -14,7 +14,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = NetworkMaskValidator.class)
 @Retention(RUNTIME)
 public @interface NetworkMask {
-  String message () default "default message";
+  String message () default "{error.network_mask}";
 
   Class<?>[] groups () default {};
 

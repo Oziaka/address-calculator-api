@@ -1,8 +1,8 @@
 package pl.validator.network_mask;
 
-import pl.network.AddressDto;
-import pl.network.Type;
+import pl.dto.AddressDto;
 import pl.exception.IncorrectNetworkMaskTypeExcpetion;
+import pl.network.Type;
 import pl.tool.ValidatorTool;
 
 import javax.validation.ConstraintValidator;

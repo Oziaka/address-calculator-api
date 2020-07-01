@@ -1,16 +1,16 @@
 package pl.service;
 
 import org.springframework.stereotype.Service;
-import pl.network.Type;
 import pl.exception.UndefinedTypeException;
-import pl.network.network_mask.BinaryNetworkMask;
-import pl.network.network_mask.DecimalNetworkMask;
-import pl.network.network_mask.NetworkMask;
-import pl.network.network_mask.NumberOfOnesNetworkMask;
+import pl.network.Type;
+import pl.network.mask.BinaryNetworkMask;
+import pl.network.mask.DecimalNetworkMask;
+import pl.network.mask.NetworkMask;
+import pl.network.mask.NumberOfOnesNetworkMask;
 
 @Service
 public class NetworkMaskService {
-  public NetworkMask getNetworkMask (String mask, Type maskType) {
+  NetworkMask getNetworkMask (String mask, Type maskType) {
     switch (maskType) {
       case BINARY:
         return NetworkMask.builder().binaryNetworkMask(new BinaryNetworkMask(mask)).build();

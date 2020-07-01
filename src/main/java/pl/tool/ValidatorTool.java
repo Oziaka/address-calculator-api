@@ -1,13 +1,12 @@
 package pl.tool;
 
-import pl.network.network_address.DecimalAddress;
-import pl.network.network_mask.BinaryNetworkMask;
+import pl.network.address.DecimalAddress;
+import pl.network.mask.BinaryNetworkMask;
 
 public class ValidatorTool {
 
-  static public boolean validBinaryAddress (String obj) {
+  public static boolean validBinaryAddress (String obj) {
     String[] addressTab = obj.split("\\.");
-//    Needed need pattern x.x.x.x
     if(addressTab.length != 4) return false;
     for (String binaryValuePieceOfAddress : addressTab) {
       try {
@@ -22,9 +21,8 @@ public class ValidatorTool {
     return true;
   }
 
-  static public boolean validDecimalAddress (String obj) {
+  public static boolean validDecimalAddress (String obj) {
     String[] addressTab = obj.split("\\.");
-//    Needed need pattern x.x.x.x
     if(addressTab.length != 4) return false;
     for (String binaryValuePieceOfAddress : addressTab) {
       try {
@@ -39,13 +37,13 @@ public class ValidatorTool {
     return true;
   }
 
-  static public boolean validBinaryMask (String obj) {
+  public static boolean validBinaryMask (String obj) {
     if(!validBinaryAddress(obj))
       return false;
     return ParserTool.fill(new BinaryNetworkMask(obj)).getAddress().replace(".", "").matches("[1]+[0]+");
   }
 
-  static public boolean validDecimalMask (String obj) {
+  public static boolean validDecimalMask (String obj) {
     if(!validDecimalAddress(obj))
       return false;
     return ParserTool.fill(ParserTool.toBinaryAddress(new DecimalAddress(obj))).getAddress().replace(".", "").matches("[1]+[0]+");

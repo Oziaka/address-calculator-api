@@ -14,7 +14,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = AddressValidator.class)
 @Retention(RUNTIME)
 public @interface Address {
-  String message ();
+  String message () default "{error.address}";
 
   Class<?>[] groups () default {};
 

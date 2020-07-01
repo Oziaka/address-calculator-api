@@ -21,15 +21,15 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(RuntimeException.class)
-  public ResponseEntity handleAllExceptions (Exception exception, WebRequest request) {
+  public ResponseEntity handleAllExceptions (Exception exception) {
     return ResponseEntity.status(BAD_REQUEST)
-      .body(new ErrorResponse(Map.of("Server Error", Collections.singletonList(exception.getLocalizedMessage()))).getErrors());
+      .body(Map.of("Server Error", Collections.singletonList(exception.getLocalizedMessage())));
   }
 
   @Override
   public ResponseEntity handleMethodArgumentNotValid (MethodArgumentNotValidException exception, HttpHeaders headers, HttpStatus status, WebRequest request) {
     return ResponseEntity
       .status(BAD_REQUEST)
-      .body(new ErrorResponse(exception.getBindingResult().getAllErrors().stream().collect(Collectors.groupingBy(ObjectError::getObjectName, Collectors.mapping(ObjectError::getDefaultMessage, Collectors.toList())))));
+      .body(exception.getBindingResult().getAllErrors().stream().collect(Collectors.groupingBy(ObjectError::getObjectName, Collectors.mapping(ObjectError::getDefaultMessage, Collectors.toList()))));
   }
 }

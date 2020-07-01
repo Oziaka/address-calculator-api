@@ -1,8 +1,8 @@
 package pl.validator.address;
 
-import pl.network.AddressDto;
-import pl.network.Type;
+import pl.dto.AddressDto;
 import pl.exception.IncorrectAddressTypeException;
+import pl.network.Type;
 import pl.tool.ValidatorTool;
 
 import javax.validation.ConstraintValidator;
@@ -27,6 +27,9 @@ public class AddressValidator implements ConstraintValidator<Address, AddressDto
         if(ValidatorTool.validDecimalAddress(address))
           return true;
         break;
+//AddressType validator should check this case
+      case NUMBER_OF_ONES:
+        return true;
       default:
         throw new IncorrectAddressTypeException();
     }

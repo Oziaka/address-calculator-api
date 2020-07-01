@@ -1,14 +1,16 @@
-package pl.network.network_address;
+package pl.network.address;
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import pl.tool.ParserTool;
 
-public class NetworkAddress {
+@EqualsAndHashCode
+public class Address {
   private BinaryAddress binaryAddress;
   private DecimalAddress decimalAddress;
 
   @Builder
-  public NetworkAddress (BinaryAddress binaryAddress, DecimalAddress decimalAddress) {
+  public Address (BinaryAddress binaryAddress, DecimalAddress decimalAddress) {
     this.binaryAddress = binaryAddress;
     this.decimalAddress = decimalAddress;
   }

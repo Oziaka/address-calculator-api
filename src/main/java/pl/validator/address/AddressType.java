@@ -10,11 +10,11 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Documented
-@Target(ElementType.FIELD)
+@Target({ElementType.FIELD, ElementType.PARAMETER})
 @Constraint(validatedBy = AddressTypeValidator.class)
 @Retention(RUNTIME)
 public @interface AddressType {
-  String message ();
+  String message () default "{error.address_type}";
 
   Class<?>[] groups () default {};
 

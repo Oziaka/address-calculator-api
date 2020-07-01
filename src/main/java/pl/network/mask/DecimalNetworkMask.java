@@ -1,6 +1,6 @@
-package pl.network.network_mask;
+package pl.network.mask;
 
-import pl.network.network_address.DecimalAddress;
+import pl.network.address.DecimalAddress;
 
 public class DecimalNetworkMask extends DecimalAddress {
   public DecimalNetworkMask (String address) {

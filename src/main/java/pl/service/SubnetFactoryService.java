@@ -1,12 +1,12 @@
 package pl.service;
 
 import org.springframework.stereotype.Service;
-import pl.network.Address;
+import pl.network.AbstractAddress;
 import pl.network.Network;
-import pl.network.network_address.BinaryAddress;
-import pl.network.network_address.NetworkAddress;
-import pl.network.network_mask.NetworkMask;
-import pl.network.network_mask.NumberOfOnesNetworkMask;
+import pl.network.address.Address;
+import pl.network.address.BinaryAddress;
+import pl.network.mask.NetworkMask;
+import pl.network.mask.NumberOfOnesNetworkMask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,25 +22,25 @@ public class SubnetFactoryService {
   }
 
   private Network generateSubnet (Network network, int i, byte numberOfFieldsForSubnet) {
-    NetworkAddress subnetNetworkAddress = generateSubnetNetworkAddress(network, i, numberOfFieldsForSubnet);
+    Address subnetAddress = generateSubnetNetworkAddress(network, i, numberOfFieldsForSubnet);
     NetworkMask subnetNetworkMask = generateSubnetNetworkMask(network, numberOfFieldsForSubnet);
     return Network.builder()
-      .networkAddress(subnetNetworkAddress)
+      .networkAddress(subnetAddress)
       .networkMask(subnetNetworkMask)
       .build();
   }
 
-  private NetworkAddress generateSubnetNetworkAddress (Network network, int i, byte numberOfFieldsForSubnet) {
-    StringBuilder binaryNetworkAddressString = new StringBuilder(Address.MAX_ADDRESS_LENGTH);
+  private Address generateSubnetNetworkAddress (Network network, int i, byte numberOfFieldsForSubnet) {
+    StringBuilder binaryNetworkAddressString = new StringBuilder(AbstractAddress.MAX_ADDRESS_LENGTH);
     binaryNetworkAddressString.append(network.getNetworkAddress().getBinaryAddress().getAddress().replace(".", "").substring(0, network.getNetworkMask().getNumberOfOnesNetworkMask().getAddress()));
     StringBuilder num = new StringBuilder(Integer.toString(i, 2));
     while (num.length() < numberOfFieldsForSubnet) num.insert(0, "0");
     binaryNetworkAddressString.append(num);
-    while (binaryNetworkAddressString.length() < Address.MAX_ADDRESS_WITH_OUT_DOTS_LENGTH)
+    while (binaryNetworkAddressString.length() < AbstractAddress.MAX_ADDRESS_WITH_OUT_DOTS_LENGTH)
       binaryNetworkAddressString.append("0");
     for (int j = 8; j < 32; j += 9)
       binaryNetworkAddressString.insert(j, '.');
-    return NetworkAddress.builder().binaryAddress(new BinaryAddress(binaryNetworkAddressString.toString())).build();
+    return Address.builder().binaryAddress(new BinaryAddress(binaryNetworkAddressString.toString())).build();
   }
 
   private NetworkMask generateSubnetNetworkMask (Network network, byte numberOfFieldsForSubnet) {

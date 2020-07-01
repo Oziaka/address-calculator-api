@@ -1,11 +1,11 @@
-package pl.network.network_mask;
+package pl.network.mask;
 
 import lombok.Builder;
-import lombok.Setter;
+import lombok.EqualsAndHashCode;
 import pl.exception.CannotFindAnyNetworkMaskException;
 import pl.tool.ParserTool;
 
-@Setter
+@EqualsAndHashCode
 public class NetworkMask {
 
   private NumberOfOnesNetworkMask numberOfOnesNetworkMask;
