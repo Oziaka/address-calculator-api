@@ -1,5 +1,8 @@
 package pl.tool;
 
+import pl.network.network_address.DecimalAddress;
+import pl.network.network_mask.BinaryNetworkMask;
+
 public class ValidatorTool {
 
   static public boolean validBinaryAddress (String obj) {
@@ -39,13 +42,13 @@ public class ValidatorTool {
   static public boolean validBinaryMask (String obj) {
     if(!validBinaryAddress(obj))
       return false;
-    return Tool.fillBinaryAddress(obj).replace(".", "").matches("[1]+[0]+");
+    return ParserTool.fill(new BinaryNetworkMask(obj)).getAddress().replace(".", "").matches("[1]+[0]+");
   }
 
   static public boolean validDecimalMask (String obj) {
     if(!validDecimalAddress(obj))
       return false;
-    return Tool.fillBinaryAddress(Tool.toBinaryAddress(obj)).replace(".", "").matches("[1]+[0]+");
+    return ParserTool.fill(ParserTool.toBinaryAddress(new DecimalAddress(obj))).getAddress().replace(".", "").matches("[1]+[0]+");
 
   }
 

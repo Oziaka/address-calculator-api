@@ -1,7 +1,7 @@
 package pl.validator.address;
 
-import pl.address.AddressDto;
-import pl.address.Type;
+import pl.network.AddressDto;
+import pl.network.Type;
 import pl.exception.IncorrectAddressTypeException;
 import pl.tool.ValidatorTool;
 

@@ -1,7 +1,7 @@
 package pl.validator.network_mask;
 
-import pl.address.AddressDto;
-import pl.address.Type;
+import pl.network.AddressDto;
+import pl.network.Type;
 import pl.exception.IncorrectNetworkMaskTypeExcpetion;
 import pl.tool.ValidatorTool;
 

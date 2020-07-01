@@ -1,4 +1,4 @@
-package pl.address;
+package pl.network;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -9,7 +9,6 @@ import pl.validator.address.AddressType;
 import pl.validator.network_mask.NetworkMask;
 
 @Getter
-@Setter
 @Address(message = "{error.address}")
 @NetworkMask(message = "{error.network_mask}")
 @NoArgsConstructor

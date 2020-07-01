@@ -1,4 +1,4 @@
-package pl.address;
+package pl.network;
 
 public enum Type {
   DECIMAL,

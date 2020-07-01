@@ -1,6 +1,6 @@
 package pl.validator.address;
 
-import pl.address.Type;
+import pl.network.Type;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

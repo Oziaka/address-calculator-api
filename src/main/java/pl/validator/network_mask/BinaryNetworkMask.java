@@ -14,7 +14,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = BinaryNetworkMaskValidator.class)
 @Retention(RUNTIME)
 public @interface BinaryNetworkMask {
-  String message ();
+  String message () default "{error.network_mask.binary}";
 
   Class<?>[] groups () default {};
 

@@ -14,7 +14,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = DecimalNetworkMaskValidator.class)
 @Retention(RUNTIME)
 public @interface DecimalNetworkMask {
-  String message ();
+  String message () default "{error.network_mask.decimal}";
 
   Class<?>[] groups () default {};
 
