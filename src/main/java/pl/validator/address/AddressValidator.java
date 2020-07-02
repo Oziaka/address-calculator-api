@@ -1,6 +1,6 @@
 package pl.validator.address;
 
-import pl.dto.AddressDto;
+import pl.dto.AddressDtoInput;
 import pl.exception.IncorrectAddressTypeException;
 import pl.network.Type;
 import pl.tool.ValidatorTool;
@@ -8,12 +8,12 @@ import pl.tool.ValidatorTool;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class AddressValidator implements ConstraintValidator<Address, AddressDto> {
+public class AddressValidator implements ConstraintValidator<Address, AddressDtoInput> {
   public void initialize (Address constraint) {
   }
 
-  public boolean isValid (AddressDto addressDto, ConstraintValidatorContext context) {
-    return validAddress(addressDto.getAddress(), addressDto.getAddressType());
+  public boolean isValid (AddressDtoInput addressDtoInput, ConstraintValidatorContext context) {
+    return validAddress(addressDtoInput.getAddress(), addressDtoInput.getAddressType());
   }
 
 

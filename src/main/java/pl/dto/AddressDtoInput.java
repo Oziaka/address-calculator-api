@@ -12,7 +12,7 @@ import pl.validator.network_mask.NetworkMask;
 @Address
 @NetworkMask
 @NoArgsConstructor
-public class AddressDto {
+public class AddressDtoInput {
 
   private String address;
   private String mask;
@@ -22,7 +22,7 @@ public class AddressDto {
   private Type maskType;
 
   @Builder
-  public AddressDto (String address, String mask, @AddressType Type addressType, Type maskType) {
+  public AddressDtoInput (String address, String mask, @AddressType Type addressType, Type maskType) {
     this.address = address;
     this.mask = mask;
     this.addressType = addressType;

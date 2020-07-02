@@ -2,15 +2,14 @@ package pl.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import pl.network.address.Address;
 
 @Getter
 public class NetworkAndBroadcastAddress {
-  private Address address;
-  private Address broadcastAddress;
+  private AddressDtoOutput address;
+  private AddressDtoOutput broadcastAddress;
 
   @Builder
-  public NetworkAndBroadcastAddress (Address address, Address broadcastAddress) {
+  public NetworkAndBroadcastAddress (AddressDtoOutput address, AddressDtoOutput broadcastAddress) {
     this.address = address;
     this.broadcastAddress = broadcastAddress;
   }

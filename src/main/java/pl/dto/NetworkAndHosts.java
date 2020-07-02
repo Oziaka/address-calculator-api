@@ -2,20 +2,18 @@ package pl.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import pl.network.Network;
-import pl.network.address.Address;
 
 import java.util.List;
 
 
 @Getter
 public class NetworkAndHosts {
-  private Network network;
-  private List<Address> hosts;
+  private NetworkDto network;
+  private List<AddressDtoOutput> addresses;
 
   @Builder
-  public NetworkAndHosts (Network network, List<Address> hosts) {
+  public NetworkAndHosts (NetworkDto network, List<AddressDtoOutput> addresses) {
     this.network = network;
-    this.hosts = hosts;
+    this.addresses = addresses;
   }
 }

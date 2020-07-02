@@ -2,7 +2,7 @@ package pl.resolver;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import pl.dto.AddressDto;
+import pl.dto.AddressDtoInput;
 import pl.dto.NetworkAndBroadcastAddress;
 import pl.mapper.NetworkAndBroadcastAddressDtoMapper;
 import pl.network.Network;
@@ -14,8 +14,8 @@ public class CalculateNetworkAndBroadcastAddressResolver {
   private NetworkService networkService;
 
 
-  public NetworkAndBroadcastAddress resolve (AddressDto addressDto) {
-    Network network = networkService.createNetwork(addressDto);
+  public NetworkAndBroadcastAddress resolve (AddressDtoInput addressDtoInput) {
+    Network network = networkService.createNetwork(addressDtoInput);
     return NetworkAndBroadcastAddressDtoMapper.toDto(network);
   }
 }

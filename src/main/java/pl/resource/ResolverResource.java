@@ -5,7 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import pl.dto.AddressDto;
+import pl.dto.AddressDtoInput;
 import pl.dto.NetworkAndBroadcastAddress;
 import pl.dto.NetworkAndHosts;
 import pl.dto.SubnetDto;
@@ -28,30 +28,30 @@ public class ResolverResource {
   private DivideAddressOnNetworkAddressResolver divideAddressOnNetworkAddressResolver;
 
   @GetMapping("/divideNetworkWithSubnet")
-  public ResponseEntity<SubnetDto> divideNetworkWithSubnet (@RequestBody @Valid AddressDto addressDto,
+  public ResponseEntity<SubnetDto> divideNetworkWithSubnet (@RequestBody @Valid AddressDtoInput addressDtoInput,
                                                             @RequestParam
                                                             @Min(value = 1, message = "{error.number_of_subnet.too_small}")
-                                                            @Max(value = 65536, message = "{error.number_of_subnet.too_big}")
+                                                            @Max(value = 131072, message = "{error.number_of_subnet.too_big}")
                                                               int numberOfSubnet) {
-    return ResponseEntity.ok(divideNetworkResolver.resolve(addressDto, numberOfSubnet, true));
+    return ResponseEntity.ok(divideNetworkResolver.resolve(addressDtoInput, numberOfSubnet, true));
   }
 
   @GetMapping("/divideNetwork")
-  public ResponseEntity<SubnetDto> divideNetwork (@RequestBody @Valid AddressDto addressDto,
+  public ResponseEntity<SubnetDto> divideNetwork (@RequestBody @Valid AddressDtoInput addressDtoInput,
                                                   @RequestParam
                                                   @Min(value = 1, message = "{error.number_of_subnet.too_small}")
                                                   @Max(value = 1073741823, message = "{error.number_of_subnet.too_big}")
                                                     int numberOfSubnet) {
-    return ResponseEntity.ok(divideNetworkResolver.resolve(addressDto, numberOfSubnet, false));
+    return ResponseEntity.ok(divideNetworkResolver.resolve(addressDtoInput, numberOfSubnet, false));
   }
 
   @GetMapping("/calculateBroadcastAndNetworkAddress")
-  public ResponseEntity<NetworkAndBroadcastAddress> calculateBroadcastAndNetworkAddress (@RequestBody @Valid AddressDto addressDto) {
-    return ResponseEntity.ok(calculateNetworkAndBroadcastAddressResolver.resolve(addressDto));
+  public ResponseEntity<NetworkAndBroadcastAddress> calculateBroadcastAndNetworkAddress (@RequestBody @Valid AddressDtoInput addressDtoInput) {
+    return ResponseEntity.ok(calculateNetworkAndBroadcastAddressResolver.resolve(addressDtoInput));
   }
 
   @GetMapping("/divideAddressOnNetworkAddress")
-  public ResponseEntity<List<NetworkAndHosts>> divideAddressOnNetworkAddress (@RequestBody @Valid List<AddressDto> addressesDto) {
+  public ResponseEntity<List<NetworkAndHosts>> divideAddressOnNetworkAddress (@RequestBody @Valid List<AddressDtoInput> addressesDto) {
     return ResponseEntity.ok(divideAddressOnNetworkAddressResolver.resolve(addressesDto));
   }
 

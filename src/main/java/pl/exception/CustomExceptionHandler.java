@@ -23,7 +23,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
   @ExceptionHandler(RuntimeException.class)
   public ResponseEntity handleAllExceptions (Exception exception) {
     return ResponseEntity.status(BAD_REQUEST)
-      .body(Map.of("Server Error", Collections.singletonList(exception.getLocalizedMessage())));
+      .body(Map.of("Server Error", Collections.singletonList(exception.getMessage())));
   }
 
   @Override

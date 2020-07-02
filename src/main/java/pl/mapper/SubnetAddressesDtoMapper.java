@@ -7,10 +7,10 @@ public class SubnetAddressesDtoMapper {
   public static SubnetAddresses toDto (Network network) {
     return SubnetAddresses
       .builder()
-      .address(network.getNetworkAddress())
-      .firstHostAddress(network.getFirstHostAddress())
-      .lastHostAddress(network.getLastHostAddress())
-      .broadcastAddress(network.getBroadcastAddress())
+      .networkAddress(AddressMapper.toDto2(network.getNetworkAddress()))
+      .firstHostAddress(AddressMapper.toDto2(network.getFirstHostAddress()))
+      .lastHostAddress(AddressMapper.toDto2(network.getLastHostAddress()))
+      .broadcastAddress(AddressMapper.toDto2(network.getBroadcastAddress()))
       .build();
   }
 }

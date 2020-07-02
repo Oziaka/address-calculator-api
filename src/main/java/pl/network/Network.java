@@ -38,12 +38,12 @@ public class Network {
 
   public Address getFirstHostAddress () {
     String binaryNetworkAddressString = getNetworkAddress().getBinaryAddress().getAddress();
-    return Address.builder().binaryAddress(new BinaryAddress(binaryNetworkAddressString.substring(0, binaryNetworkAddressString.length() - 2) + "1")).build();
+    return Address.builder().binaryAddress(new BinaryAddress(binaryNetworkAddressString.substring(0, binaryNetworkAddressString.length() - 1) + "1")).build();
   }
 
   public Address getLastHostAddress () {
     String binaryBroadcastAddressString = getBroadcastAddress().getBinaryAddress().getAddress();
-    return Address.builder().binaryAddress(new BinaryAddress(binaryBroadcastAddressString.substring(0, binaryBroadcastAddressString.length() - 2) + "0")).build();
+    return Address.builder().binaryAddress(new BinaryAddress(binaryBroadcastAddressString.substring(0, binaryBroadcastAddressString.length() - 1) + "0")).build();
   }
 }
 

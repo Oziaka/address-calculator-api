@@ -1,6 +1,6 @@
 package pl.validator.network_mask;
 
-import pl.dto.AddressDto;
+import pl.dto.AddressDtoInput;
 import pl.exception.IncorrectNetworkMaskTypeExcpetion;
 import pl.network.Type;
 import pl.tool.ValidatorTool;
@@ -8,12 +8,12 @@ import pl.tool.ValidatorTool;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class NetworkMaskValidator implements ConstraintValidator<NetworkMask, AddressDto> {
+public class NetworkMaskValidator implements ConstraintValidator<NetworkMask, AddressDtoInput> {
   public void initialize (NetworkMask constraint) {
   }
 
-  public boolean isValid (AddressDto addressDto, ConstraintValidatorContext context) {
-    return validMask(addressDto.getMask(), addressDto.getMaskType());
+  public boolean isValid (AddressDtoInput addressDtoInput, ConstraintValidatorContext context) {
+    return validMask(addressDtoInput.getMask(), addressDtoInput.getMaskType());
   }
 
   private boolean validMask (String mask, Type maskType) {

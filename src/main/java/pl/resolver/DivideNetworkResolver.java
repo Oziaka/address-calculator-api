@@ -3,9 +3,10 @@ package pl.resolver;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import pl.dto.AddressDto;
+import pl.dto.AddressDtoInput;
 import pl.dto.SubnetDto;
 import pl.exception.DoNotHaveEnoughFieldsToForSubnet;
+import pl.mapper.NetworkMaskMapper;
 import pl.mapper.SubnetAddressesDtoMapper;
 import pl.network.Network;
 import pl.network.mask.NetworkMask;
@@ -26,12 +27,12 @@ public class DivideNetworkResolver {
   private NetworkService networkService;
   private SubnetFactoryService subnetFactoryService;
 
-  public SubnetDto resolve (AddressDto addressDto, int numberOfSubnet, boolean withSubnet) {
+  public SubnetDto resolve (AddressDtoInput addressDtoInput, int numberOfSubnet, boolean withSubnet) {
     byte numberOfFieldsForSubnet = Tool.numberOfFieldsForSubnet(Tool.minNumberOfSubnet(numberOfSubnet));
-    Network network = networkService.createNetwork(addressDto);
+    Network network = networkService.createNetwork(addressDtoInput);
     whetherTheNetworkWillFitSoManySubnet(network, numberOfFieldsForSubnet);
     SubnetDto.SubnetDtoBuilder subnetDtoBuilder = SubnetDto.builder()
-      .networkMask(NetworkMask.builder().numberOfOnesNetworkMask(new NumberOfOnesNetworkMask((byte) (numberOfFieldsForSubnet + network.getNetworkMask().getNumberOfOnesNetworkMask().getAddress()))).build())
+      .networkMask(NetworkMaskMapper.toDto(NetworkMask.builder().numberOfOnesNetworkMask(new NumberOfOnesNetworkMask((byte) (numberOfFieldsForSubnet + network.getNetworkMask().getNumberOfOnesNetworkMask().getAddress()))).build()))
       .numberOfSubnet((long) (Math.pow(2, numberOfFieldsForSubnet)))
       .numberOfHostsPerSubnet((long) (Math.pow(2, 32 - (byte) (numberOfFieldsForSubnet + network.getNetworkMask().getNumberOfOnesNetworkMask().getAddress()))));
     if(withSubnet) {
