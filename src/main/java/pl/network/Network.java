@@ -6,6 +6,7 @@ import lombok.Getter;
 import pl.network.address.Address;
 import pl.network.address.BinaryAddress;
 import pl.network.mask.NetworkMask;
+import pl.tool.ParserTool;
 
 @Getter
 @EqualsAndHashCode
@@ -22,7 +23,8 @@ public class Network {
   }
 
   private static Address generateBroadcastAddress (Address address, NetworkMask networkMask) {
-    StringBuilder binaryBroadcastAddressString = new StringBuilder(address.getBinaryAddress().getAddress().replaceAll("\\.", "").substring(0, networkMask.getNumberOfOnesNetworkMask().getAddress()));
+    BinaryAddress binaryAddress = ParserTool.fill(address.getBinaryAddress());
+    StringBuilder binaryBroadcastAddressString = new StringBuilder(binaryAddress.getAddress().replaceAll("\\.", "").substring(0, networkMask.getNumberOfOnesNetworkMask().getAddress()));
     while (binaryBroadcastAddressString.length() < AbstractAddress.MAX_ADDRESS_WITH_OUT_DOTS_LENGTH)
       binaryBroadcastAddressString.append("1");
     for (int j = 8; j < 32; j += 9)
