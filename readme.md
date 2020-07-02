@@ -107,7 +107,7 @@ Request param divideNetworkWithSubnet is between 1 and 1073741823
 > Response 200 Status OK
 ```
 {
-    "address": {
+    "networkAddress": {
         "binary": "10111111.10101000.0.0",
         "decimal": "191.168.0.0"
     },

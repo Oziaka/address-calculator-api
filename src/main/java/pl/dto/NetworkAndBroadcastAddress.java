@@ -5,12 +5,12 @@ import lombok.Getter;
 
 @Getter
 public class NetworkAndBroadcastAddress {
-  private AddressDtoOutput address;
+  private AddressDtoOutput networkAddress;
   private AddressDtoOutput broadcastAddress;
 
   @Builder
-  public NetworkAndBroadcastAddress (AddressDtoOutput address, AddressDtoOutput broadcastAddress) {
-    this.address = address;
+  public NetworkAndBroadcastAddress (AddressDtoOutput networkAddress, AddressDtoOutput broadcastAddress) {
+    this.networkAddress = networkAddress;
     this.broadcastAddress = broadcastAddress;
   }
 }
